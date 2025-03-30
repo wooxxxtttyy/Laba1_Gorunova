@@ -1,0 +1,37 @@
+services:
+  app1:
+    container_name: app1
+    build:
+      context: . 
+      dockerfile: Dockerfile
+    volumes:
+      - ./app.py:/app/app.py  
+
+  app2:
+    container_name: app2
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./app.py:/app/app.py  
+
+  app3:
+    container_name: app3
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./app.py:/app/app.py  
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf  # Подключение конфигурации Nginx
+    ports:
+      - "80:80"  
+    depends_on:
+      - app1
+      - app2
+      - app3
+
+
